@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(...rest) {
+  let max = 0;
+  for (let i = 0; i < rest.length; i += 1) {
+    if (rest[i] > max) {
+      max = rest[i];
+    }
+  }
+
+  return max;
 }
 
 /**
@@ -60,8 +67,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const intersectsColumn = queen.x === king.x;
+  const intersectsRow = queen.y === king.y;
+  const intersectsDiagonal =
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y);
+  return intersectsColumn || intersectsRow || intersectsDiagonal;
 }
 
 /**
@@ -82,8 +93,21 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  function isTriangle(side1, side2, side3) {
+    return (
+      side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1
+    );
+  }
+
+  if (isTriangle(a, b, c)) {
+    const ab = a === b;
+    const ac = a === c;
+    const bc = b === c;
+    return ab || ac || bc;
+  }
+
+  return false;
 }
 
 /**
@@ -119,8 +143,58 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const number = numberStr[i];
+    switch (number) {
+      case '0':
+        result += 'zero';
+        break;
+      case '1':
+        result += 'one';
+        break;
+      case '2':
+        result += 'two';
+        break;
+      case '3':
+        result += 'three';
+        break;
+      case '4':
+        result += 'four';
+        break;
+      case '5':
+        result += 'five';
+        break;
+      case '6':
+        result += 'six';
+        break;
+      case '7':
+        result += 'seven';
+        break;
+      case '8':
+        result += 'eight';
+        break;
+      case '9':
+        result += 'nine';
+        break;
+      case '.':
+        result += 'point';
+        break;
+      case ',':
+        result += 'point';
+        break;
+      default:
+        result += 'minus';
+        break;
+    }
+    if (i !== numberStr.length - 1) {
+      result += ' ';
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -135,8 +209,17 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let startIndex = 0;
+  let endIndex = str.length;
+  while (startIndex < endIndex) {
+    if (str[startIndex] !== str[endIndex - 1]) {
+      return false;
+    }
+    startIndex += 1;
+    endIndex -= 1;
+  }
+  return true;
 }
 
 /**
@@ -153,8 +236,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let counter = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      return counter;
+    }
+    counter += 1;
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +262,15 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const numToString = `${num}`;
+  const digitToString = `${digit}`;
+  for (let i = 0; i < numToString.length; i += 1) {
+    if (numToString[i] === digitToString) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
