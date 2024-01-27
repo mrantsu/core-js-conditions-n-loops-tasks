@@ -124,8 +124,26 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let givenNumber = num;
+  let result = '';
+  const romanNumbersList = [
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' },
+  ];
+
+  for (let i = 0; i < romanNumbersList.length; i += 1) {
+    const { value, numeral } = romanNumbersList[i];
+    while (givenNumber >= value) {
+      result += numeral;
+      givenNumber -= value;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -286,8 +304,26 @@ function isContainNumber(num, digit) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  const { length } = arr;
+  for (let i = 0; i < length; i += 1) {
+    let leftSideSum = 0;
+    let rightSideSum = 0;
+
+    for (let j = 0; j < i; j += 1) {
+      leftSideSum += arr[j];
+    }
+
+    for (let k = i + 1; k < length; k += 1) {
+      rightSideSum += arr[k];
+    }
+
+    if (leftSideSum === rightSideSum) {
+      return i;
+    }
+  }
+
+  return -1;
 }
 
 /**
